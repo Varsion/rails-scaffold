@@ -4,7 +4,7 @@ class ScaffoldSchema < GraphQL::Schema
   end
 
   class Mutation < Types::Base::Object
-
+    field :create_registration, mutation: Mutations::CreateRegistration
   end
 
   query Query
