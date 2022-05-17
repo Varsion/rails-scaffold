@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   def login
     JWT.encode({
-      account_id: id,
+      user_id: id,
       created_at: DateTime.now.strftime("%Q")},
       Rails.application.credentials.secret_key_base
     )

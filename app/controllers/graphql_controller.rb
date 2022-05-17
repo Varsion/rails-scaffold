@@ -8,10 +8,9 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
-    }
+
+    user_data = current_user.presence || {}
+    context = user_data.merge(request: request, response: response)
     result = ScaffoldSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
@@ -46,5 +45,17 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def current_user
+    token = request.headers["Authorization"]
+    begin
+      data = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
+      user = User.find_by(id: data["user_id"])
+
+      { user: user, token: token }
+    rescue JWT::DecodeError
+      {}
+    end
   end
 end
