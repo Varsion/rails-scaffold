@@ -5,6 +5,7 @@ class ScaffoldSchema < GraphQL::Schema
 
   class Mutation < Types::Base::Object
     field :create_registration, mutation: Mutations::CreateRegistration
+    field :create_session, mutation: Mutations::CreateSession
   end
 
   query Query
