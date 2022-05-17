@@ -1,6 +1,6 @@
 class ScaffoldSchema < GraphQL::Schema
   class Query < Types::Base::Object
-
+    field :user, resolver: Resolvers::UserResolver
   end
 
   class Mutation < Types::Base::Object
