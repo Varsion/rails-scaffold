@@ -20,7 +20,25 @@ what i did:
 - organize the `Types::Base`, i think they are basic.
 - make graphql schema as a router file, summarize all `resolvers` and `mutations`.
 
-![GraphQL Files Tree](./readme-asset/grahql-files-tree.png)
+```shell
+✘ tree ./app/graphql
+./app/graphql
+├── mutations
+│   ├── base_mutation.rb
+│   ├── ...
+├── resolvers
+│   ├── base_resolver.rb
+│   └── ...
+├── *_schema.rb
+└── types
+    ├── base
+    │   ├── argument.rb
+    │   ├── ...
+    ├── inputs
+    │   ├── ...
+    ├── *_type.rb
+    └── ...
+```
 
 and for a new query flow:
 
