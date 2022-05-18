@@ -9,7 +9,7 @@ A Rails development scaffold for me.
 For [graphql-ruby](https://graphql-ruby.org) we can generate the GraphQL files and floder
 
 ```shell
- rails generate graphql:install
+	rails generate graphql:install
 ```
 
 The auto-generated directory structure is not very good for me, so i reorganized the folder logic.
@@ -52,12 +52,68 @@ and for a new query flow:
 Btw, I add a email type for argument type with parameter verification.
 
 ```ruby
-argument :email, Types::Base::Email, required: true
+	argument :email, Types::Base::Email, required: true
 ```
 
 ## RSpec
 
-Pending......
+- add `json_expectations`
+
+  can use `include_json` like this
+
+```ruby
+  expect(response.body).to include_json({
+    data: {
+      createRegistration: {
+        user: {
+          name: "test_account",
+          email: "test_account@exm.com"
+          }
+        }
+      }
+    })
+```
+
+- add the `basic_headers` and `user_headers` in `./rspec/rails_helper`
+
+```ruby
+  # about headers
+  config.include Module.new {
+    def basic_headers
+      {
+        "Content-Type" => "application/json"
+      }
+    end
+
+    def user_headers(user: @user)
+      jwt =
+        JWT.encode({
+            user_id: user.id,
+            created_at: DateTime.now.strftime("%Q")},
+            Rails.application.credentials.secret_key_base
+          )
+        basic_headers.merge("Authorization": jwt)
+    end
+  }
+```
+
+- add `nyan-cat-formatter` when run rspec
+
+```shell
+✘ rspec spec/requests/graphql/                               
+8/8: -_-_-_-__,------,   
+8/8: -_-_-_-__|  /\_/\ 
+0/8: -_-_-_-_~|_( - .-)  
+0/8: -_-_-_-_ ""  "" 
+
+You've Nyaned for 0.47 seconds
+
+
+Finished in 0.47107 seconds (files took 1.32 seconds to load)
+8 examples, 0 failures
+```
+
+- add the faker gem for test data, ref: https://github.com/faker-ruby/faker
 
 ## Authentication
 
