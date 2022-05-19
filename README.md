@@ -4,6 +4,47 @@
 
 A Rails development scaffold for me.
 
+## Get Started
+
+### Overview
+
+- PostgreSQL
+- GraphQL
+- Rspec with FactoryBotstandardrb
+- standardrb
+
+### Qucikly Development
+
+```shell
+# Please implement to download&open docker
+docker composer-up
+```
+
+in `./docker-compose.yml` i prepare the basic database:
+
+- PostgreSQL: username and password is default `postgres`.
+- Redis: default settings.
+
+then, update the database settings on `./config/database.yml` if need.
+
+```shell
+rails db:create
+# bin/rails db:create
+```
+
+Create the default database.
+
+```shell
+rails db:migrate
+# bin/rails db:migrate
+```
+
+Run the migration file, i prepare the `User` and basic authentication, pls ref to: [Authentication](#Authentication)
+
+Pls update the `User` miragtion if you need.
+
+---
+
 ## GraphQL
 
 For [graphql-ruby](https://graphql-ruby.org) we can generate the GraphQL files and floder
