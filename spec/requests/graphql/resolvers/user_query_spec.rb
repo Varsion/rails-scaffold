@@ -19,7 +19,7 @@ RSpec.describe "GraphQL - User Query", type: :request do
   it "work! get current user success" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {}
       }.to_json, headers: user_headers
     expect(response.status).to eq 200
@@ -37,7 +37,7 @@ RSpec.describe "GraphQL - User Query", type: :request do
   it "work! no login" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {}
       }.to_json, headers: basic_headers
     expect(response.status).to eq 200

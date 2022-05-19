@@ -46,7 +46,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-
   # about headers
   config.include Module.new {
     def basic_headers
@@ -58,11 +57,10 @@ RSpec.configure do |config|
     def user_headers(user: @user)
       jwt =
         JWT.encode({
-            user_id: user.id,
-            created_at: DateTime.now.strftime("%Q")},
-            Rails.application.credentials.secret_key_base
-          )
-        basic_headers.merge("Authorization": jwt)
+          user_id: user.id,
+          created_at: DateTime.now.strftime("%Q")
+        }, Rails.application.credentials.secret_key_base)
+      basic_headers.merge(Authorization: jwt)
     end
   }
   # You can uncomment this line to turn off ActiveRecord support entirely.

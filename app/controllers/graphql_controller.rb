@@ -44,7 +44,7 @@ class GraphqlController < ApplicationController
     logger.error e.message
     logger.error e.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+    render json: {errors: [{message: e.message, backtrace: e.backtrace}], data: {}}, status: 500
   end
 
   def current_user
@@ -53,7 +53,7 @@ class GraphqlController < ApplicationController
       data = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
       user = User.find_by(id: data["user_id"])
 
-      { user: user, token: token }
+      {user: user, token: token}
     rescue JWT::DecodeError
       {}
     end

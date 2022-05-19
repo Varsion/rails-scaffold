@@ -22,7 +22,7 @@ RSpec.describe "GraphQL - Create Registration Mutations", type: :request do
   it "work! register success" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             name: "test_account",
@@ -47,7 +47,7 @@ RSpec.describe "GraphQL - Create Registration Mutations", type: :request do
   it "work! argument - email check failed" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             name: "test_account",
@@ -68,7 +68,7 @@ RSpec.describe "GraphQL - Create Registration Mutations", type: :request do
     user = create(:user)
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             name: "test_account",

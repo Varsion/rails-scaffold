@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "GraphQL - Create Session Mutations", type: :request do
-
   before :each do
     @user = create(:user)
   end
@@ -25,7 +24,7 @@ RSpec.describe "GraphQL - Create Session Mutations", type: :request do
   it "work! login success" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             email: @user.email,
@@ -48,7 +47,7 @@ RSpec.describe "GraphQL - Create Session Mutations", type: :request do
   it "work! login error - password error" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             email: @user.email,
@@ -72,7 +71,7 @@ RSpec.describe "GraphQL - Create Session Mutations", type: :request do
   it "work! login error - email error" do
     post "/graphql",
       params: {
-        query: query, 
+        query: query,
         variables: {
           input: {
             email: "aaa" + @user.email,

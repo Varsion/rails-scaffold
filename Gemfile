@@ -31,7 +31,7 @@ gem "graphql", "1.12.17"
 gem "apollo_upload_server", "2.0.0.beta.3"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -45,10 +45,9 @@ gem "rack-cors"
 # Use JWT
 gem "jwt"
 
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", platforms: %i[mri mingw x64_mingw]
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot"
@@ -64,4 +63,3 @@ group :development do
   gem "spring"
   gem "awesome_print"
 end
-
