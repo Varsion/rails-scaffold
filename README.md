@@ -214,4 +214,4 @@ And merge the current user infos into the `request_life_cycle` ( `context`
 
 ### Regenerate `master.key` & `credentials.yml.enc`
 
-https://gist.github.com/db0sch/19c321cbc727917bc0e12849a7565af9
+<script src="https://gist.github.com/Varsion/db1fc4fc360a684b85034edbc81c70c5.js"></script>
