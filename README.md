@@ -158,5 +158,60 @@ Finished in 0.47107 seconds (files took 1.32 seconds to load)
 
 ## Authentication
 
-Pending......
+### Premise
 
+- [Rails Sessions](https://edgeguides.rubyonrails.org/security.html#sessions)
+
+- [Rails Credentials](https://www.freshworks.com/eng-blogs/managing-rails-application-secrets-with-encrypted-credentials-blog/)
+
+- [How to use `config/credentials` file in rails](https://dev.to/vishal8236/how-to-use-config-credentials-file-in-rails-j)
+
+### What i did
+
+I store a `secret_key_base` in credentials files.
+
+```ruby
+# app/models/user.rb
+
+def login
+  JWT.encode({
+    user_id: id,
+    created_at: DateTime.now.strftime("%Q")
+    }, Rails.application.credentials.secret_key_base)
+end
+```
+
+Generate the token of the logged in user through this method.
+
+And in GraphQL entry file (entry controller)
+
+```ruby
+# app/controllers/graphql_controller.rb:50
+
+def current_user
+  token = request.headers["Authorization"]
+  begin
+    data = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
+    user = User.find_by(id: data["user_id"])
+
+    {user: user, token: token}
+  rescue JWT::DecodeError
+    {}
+  end
+end
+```
+
+I get the `user_id `of the logged in user by getting the token and decrypting it. Then take out all the information of the current user
+
+```ruby
+# app/controllers/graphql_controller.rb:12
+
+user_data = current_user.presence || {}
+context = user_data.merge(request: request, response: response)
+```
+
+And merge the current user infos into the `request_life_cycle` ( `context`
+
+### Regenerate `master.key` & `credentials.yml.enc`
+
+https://gist.github.com/db0sch/19c321cbc727917bc0e12849a7565af9
