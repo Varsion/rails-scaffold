@@ -215,3 +215,5 @@ And merge the current user infos into the `request_life_cycle` ( `context`
 ### Regenerate `master.key` & `credentials.yml.enc`
 
 https://gist.github.com/Varsion/db1fc4fc360a684b85034edbc81c70c5
+
+Need to add `secret_key_base` into `credentials.yml.enc` after regeneration.
