@@ -13,7 +13,7 @@ class GraphqlController < ApplicationController
     context = user_data.merge(request: request, response: response)
     result = ScaffoldSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
-  rescue StandardError => e
+  rescue => e
     raise e unless Rails.env.development?
     handle_error_in_development(e)
   end
